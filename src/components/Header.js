@@ -25,13 +25,13 @@ const formatLinks = allLinks =>
       const isHome = key === 'home';
       return isHome
         ? {
-            ...acc,
-            home: value,
-          }
+          ...acc,
+          home: value,
+        }
         : {
-            ...acc,
-            links: [...acc.links, { name: capitalize(key), value }],
-          };
+          ...acc,
+          links: [...acc.links, { name: capitalize(key), value }],
+        };
     },
     { links: [], home: null },
   );
@@ -60,24 +60,24 @@ const Header = ({ currentPath }) => (
                 }}
               />
             ) : (
-              <Image
-                src={Logo}
-                width="50px"
-                alt="Portfolio Logo"
-                onClick={() => navigate('/')}
-                style={{
-                  cursor: 'pointer',
-                }}
-              />
-            );
+                <Image
+                  src={Logo}
+                  width="50px"
+                  alt="Portfolio Logo"
+                  onClick={() => navigate('/')}
+                  style={{
+                    cursor: 'pointer',
+                  }}
+                />
+              );
 
             const peopleLink = (
               <RouteLink
-                key="People"
-                onClick={() => navigate('/people')}
+                key="Blog"
+                onClick={() => navigate('https://shuwang.netlify.com')}
                 selected={currentPath == '/people'}
               >
-                People
+                Blog
               </RouteLink>
             );
 
