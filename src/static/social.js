@@ -1,15 +1,15 @@
 const socialLinks = [
   {
     id: 'github',
-    url: 'https://github.com/good-data-movement',
+    url: 'https://github.com/shuwan9',
     name: 'Github',
     fontAwesomeIcon: ['fab', 'github'],
   },
   {
-    id: 'discord',
-    url: 'https://discord.gg/78r9eSZ',
-    name: 'Discord',
-    fontAwesomeIcon: ['fab', 'discord'],
+    id: 'twitter',
+    url: 'https://twitter.com/shuwan91',
+    name: 'Twitter',
+    fontAwesomeIcon: ['fab', 'twitter'],
   },
 ];
 

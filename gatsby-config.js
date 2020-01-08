@@ -1,9 +1,9 @@
 module.exports = {
   pathPrefix: '/website',
   siteMetadata: {
-    title: `GDM`,
-    description: `The Good Data Movement website, empowering people to take back control of their personal data.`,
-    author: `@ps-george`,
+    title: `疏旺的简历`,
+    description: `shuwan9's resume`,
+    author: `@shuwan9`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

@@ -9,7 +9,7 @@ import SEO from '../components/Seo';
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" />
+    <SEO title="疏旺" />
     <Header currentPath="/" />
     <Landing />
     <About />

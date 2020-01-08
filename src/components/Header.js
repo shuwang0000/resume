@@ -9,6 +9,13 @@ import Logo from '../static/gatsby-icon.png';
 import { navigate } from '@reach/router';
 
 const capitalize = s => s && s[0].toUpperCase() + s.slice(1);
+const getName = name => {
+  const list = {
+    'about': '关于',
+    'projects': '项目'
+  }
+  return list[name]
+}
 
 const HeaderContainer = styled(Headroom)`
   .headroom--pinned {
@@ -30,7 +37,7 @@ const formatLinks = allLinks =>
         }
         : {
           ...acc,
-          links: [...acc.links, { name: capitalize(key), value }],
+          links: [...acc.links, { name: getName(key), value }],
         };
     },
     { links: [], home: null },

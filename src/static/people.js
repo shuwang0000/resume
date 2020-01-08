@@ -9,7 +9,7 @@ const people = [
     social: [
       {
         id: 'github',
-        url: 'https://github.com/good-data-movement',
+        url: 'https://github.com/shuwan9',
         name: 'Github',
         fontAwesomeIcon: ['fab', 'github'],
       },

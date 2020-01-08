@@ -42,7 +42,7 @@ const Background = () => (
 );
 
 const centerHorizontally = { marginRight: 'auto', marginLeft: 'auto' };
-const name = 'Good Data Movement';
+const profession = '前端工程师'
 
 const LandingPage = () => (
   <Section.Container id="home" Background={Background}>
@@ -54,7 +54,9 @@ const LandingPage = () => (
         fontSize={[5, 6, 8]}
         mb={[3, 4, 5]}
       >
-        {`${name}`}
+        <Fragment>
+          {`${profession}`}
+        </Fragment>
       </Heading>
 
       <Heading
@@ -65,7 +67,7 @@ const LandingPage = () => (
         textAlign="center"
         style={centerHorizontally}
       >
-        <TextLoop interval={5000}>
+        <TextLoop interval={2000}>
           {values
             .sort(() => Math.random() - 0.5)
             .map(text => (
