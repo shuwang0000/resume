@@ -4,6 +4,8 @@ module.exports = {
     title: `疏旺的简历`,
     description: `shuwan9's resume`,
     author: `@shuwan9`,
+    myCssSrc: 'https://cdn.repository.webfont.com/webfonts/nomal/95877/46489/5e17f7f8f629d8048005cfd2.css',
+    myFontFamily: 'jin_mei_mxplzx1e32c9eb3217685'
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

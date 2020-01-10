@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Headroom from 'react-headroom';
 import { Flex, Image } from 'rebass';
 import styled from '@emotion/styled';
@@ -7,7 +7,22 @@ import Fade from 'react-reveal/Fade';
 import RouteLink from './RouteLink';
 import Logo from '../static/gatsby-icon.png';
 import { navigate } from '@reach/router';
-
+import { graphql, useStaticQuery } from 'gatsby'
+function getCssConfig() {
+  const { site } = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            myCssSrc
+            myFontFamily
+          }
+        }
+      }
+    `,
+  );
+  return site
+}
 const capitalize = s => s && s[0].toUpperCase() + s.slice(1);
 const getName = name => {
   const list = {
@@ -43,76 +58,88 @@ const formatLinks = allLinks =>
     { links: [], home: null },
   );
 
-const Header = ({ currentPath }) => (
-  <HeaderContainer>
-    <Fade top>
-      <Flex
-        flexWrap="wrap"
-        justifyContent="space-between"
-        alignItems="center"
-        p={3}
-      >
-        <SectionLinks>
-          {({ allLinks }) => {
-            const { home, links } = formatLinks(allLinks);
+const Header = ({ currentPath }) => {
+  let { siteMetadata: { myCssSrc, myFontFamily } } = getCssConfig() || { siteMetadata: {} }
+  useEffect(() => {
+    myCssSrc && linkCss(myCssSrc)
+  })
 
-            const homeLink = home ? (
-              <Image
-                src={Logo}
-                width="50px"
-                alt="Portfolio Logo"
-                onClick={home.onClick}
-                style={{
-                  cursor: 'pointer',
-                }}
-              />
-            ) : (
-                <Image
+  function linkCss(src) {
+    let link = document.createElement('link')
+    link.type = "text/css"
+    link.rel = "stylesheet"
+    link.href = src
+    document.querySelector('head').appendChild(link)
+  }
+
+
+  return (
+    <HeaderContainer>
+      <Fade top>
+        <Flex
+          flexWrap="wrap"
+          justifyContent="space-between"
+          alignItems="center"
+          p={3}
+        >
+          <SectionLinks>
+            {({ allLinks }) => {
+              const { home, links } = formatLinks(allLinks);
+
+              const homeLink = home ? (
+                <div
                   src={Logo}
                   width="50px"
                   alt="Portfolio Logo"
-                  onClick={() => navigate('/')}
+                  onClick={home.onClick}
                   style={{
                     cursor: 'pointer',
+                    // color: '#7c37ad',
+                    color: '#ffffff',
+                    fontFamily: myFontFamily,
+                    fontSize: '5vw'
                   }}
-                />
+                >
+                  <span>疏旺</span>
+                </div>
+              ) : null
+
+              const peopleLink = (
+                <RouteLink
+                  key="博客"
+                  onClick={() => navigate('https://shuwan9.surge.sh')}
+                  selected={currentPath == '/people'}
+                >
+                  {'博客'}
+                </RouteLink>
               );
 
-            const peopleLink = (
-              <RouteLink
-                key="Blog"
-                onClick={() => navigate('https://shuwang.netlify.com')}
-                selected={currentPath == '/people'}
-              >
-                Blog
-              </RouteLink>
-            );
-
-            let navLinks = links.map(({ name, value }) => (
-              <RouteLink
-                key={name}
-                onClick={value.onClick}
-                selected={value.selected}
-              >
-                {name}
-              </RouteLink>
-            ));
-            return (
-              <Fragment>
-                {homeLink}
-                <Flex mr={[0, 3, 5]}>
-                  <Flex>{navLinks}</Flex>
-                  {/* Other links*/}
-                  {peopleLink}
-                  <Flex></Flex>
-                </Flex>
-              </Fragment>
-            );
-          }}
-        </SectionLinks>
-      </Flex>
-    </Fade>
-  </HeaderContainer>
-);
+              let navLinks = links.map(({ name, value }) => (
+                <RouteLink
+                  key={name}
+                  onClick={value.onClick}
+                  selected={value.selected}
+                >
+                  {name}
+                </RouteLink>
+              ));
+              return (
+                <Fragment>
+                  {homeLink}
+                  <Flex mr={[0, 3, 5]}>
+                    <Flex>{navLinks}</Flex>
+                    {/* Other links*/}
+                    {peopleLink}
+                    <Flex></Flex>
+                  </Flex>
+                </Fragment>
+              );
+            }}
+          </SectionLinks>
+        </Flex>
+      </Fade>
+    </HeaderContainer>
+  )
+};
 
 export default Header;
